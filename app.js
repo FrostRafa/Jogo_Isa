@@ -5,7 +5,7 @@
 //paragrafo.innerHTML = `Escolha um número de 1 a ${numeroMaximo}.`;
 
 let listaDeNumerosSorteados = [];
-let limiteNumero = 10;
+let limiteNumero = 20;
 let numeroSecreto = gerarNumeroAleatorio ();
 let tentativas = 1
 exibirMensagemInicial ();
@@ -16,14 +16,14 @@ function exibirTextoNaTela (tag, texto) {
     campo.innerHTML = texto;
     responsiveVoice.speak(texto, "Brazilian Portuguese Female", {rate: 1.0});
 }
-exibirTextoNaTela ("h1", "Bem vindos ao Jogo da Isa!");
-exibirTextoNaTela ("p", "Escolha um número entre 1 e 10.");
+exibirTextoNaTela ("h1", "Bem vinda Isabela!");
+exibirTextoNaTela ("p", "Escolha um número de 1 a 20.");
+
 
 function exibirMensagemInicial () {
-    exibirTextoNaTela ("h1", "Bem vindos ao Jogo do Número Secreto!");
-    exibirTextoNaTela ("p", "Escolha um número entre 1 e 10.");
+    exibirTextoNaTela ("h1", "Bem vinda Isabela!");
+    exibirTextoNaTela ("p", "Escolha um número de 1 a 20.");
 }
-
 
 
 function gerarNumeroAleatorio () {
@@ -40,6 +40,7 @@ function gerarNumeroAleatorio () {
         return numeroEscolhido;
     }
 }
+
 function limparCampo () {
     chute = document.querySelector ("input");
     chute.value = "";
@@ -55,17 +56,25 @@ function reiniciarJogo () {
 
 function verificarChute() {
     let chute = document.querySelector ("input").value;
-    if (chute == numeroSecreto) {
-        exibirTextoNaTela ("h1", "Você acertou!");
+    console.log (typeof chute);
+        if (isNaN (chute) || chute.trim() === "") {
+            exibirTextoNaTela ("p", "Não pode usar letras Isa! Digite apenas números.");
+            return;
+        }
+
+        chute = parseInt(chute); 
+        
+        if (chute == numeroSecreto) {
+        exibirTextoNaTela ("h1", "Você acertou o Número Secreto!");
         let palavraTentativa = tentativas > 1 ? "Tentativas" : "Tentativa";
-        let mensagemTentativas = `Você descobriu o Número Secreto em ${tentativas} ${palavraTentativa}!`;
+        let mensagemTentativas = `Você descobriu o Número Secreto em ${tentativas} ${palavraTentativa}! Parabéns Isa!`;
         exibirTextoNaTela ("p", mensagemTentativas);
         document.getElementById ("reiniciar").removeAttribute ("disabled");
     } else {
         if (chute > numeroSecreto) {
-            exibirTextoNaTela ("p", `O Número Secreto é menor.`);
+            exibirTextoNaTela ("p", `O Número Secreto é menor que o número ${chute}.`);
     } else {
-        exibirTextoNaTela ("p", `O Número Secreto é maior.`);
+        exibirTextoNaTela ("p", `O Número Secreto é maior que o número ${chute}.`);
     }
     tentativas++
     limparCampo ()
