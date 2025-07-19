@@ -16,12 +16,12 @@ function exibirTextoNaTela (tag, texto) {
     campo.innerHTML = texto;
     responsiveVoice.speak(texto, "Brazilian Portuguese Female", {rate: 1.0});
 }
-exibirTextoNaTela ("h1", "Bem vinda Isabela!");
+exibirTextoNaTela ("h1", "Bem vinda Isabella!");
 exibirTextoNaTela ("p", "Escolha um número de 1 a 20.");
 
 
 function exibirMensagemInicial () {
-    exibirTextoNaTela ("h1", "Bem vinda Isabela!");
+    exibirTextoNaTela ("h1", "Bem vinda Isabella!");
     exibirTextoNaTela ("p", "Escolha um número de 1 a 20.");
 }
 
